@@ -55,7 +55,6 @@ def handleRedirect(driver):
     bblink = driver.find_element_by_xpath("/html/body/div[1]/div/div/ul/li[1]/a")
     bblink.click()
 
-
 def go():
     driver = webdriver.Chrome(executable_path)
     gotoBB(driver)
@@ -63,7 +62,10 @@ def go():
     handleRedirect(driver)
     fillOutForm(driver)
     driver.switch_to.parent_frame()
-    print(driver.title)
+    if driver.title[-16:] != "Blackboard Learn":
+        driver.close()
+        root.quit()
+
 
 
 getButton = tk.Button(root, text="Go", command=go).grid(row=2, column=1)
