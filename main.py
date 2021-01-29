@@ -17,8 +17,6 @@ passwordEntry.grid(row=1, column=1)
 
 root.geometry(dimension)
 
-executable_path = "c:\se\chromedriver.exe"
-
 
 def getUsername():
     username = usernameEntry.get()
@@ -55,16 +53,22 @@ def handleRedirect(driver):
     bblink = driver.find_element_by_xpath("/html/body/div[1]/div/div/ul/li[1]/a")
     bblink.click()
 
+def clickMyGrades(driver):
+    driver.switch_to.parent_frame()
+    mygrades = driver.find_element_by_xpath("/html/body/div[5]/div/div/div[2]/div[2]/div/div/div/div[4]/div[2]/div[2]/ul/li[4]/a")
+    mygrades.click()
+
 def go():
+    executable_path = "c:\se\chromedriver.exe"
     driver = webdriver.Chrome(executable_path)
     gotoBB(driver)
     fillOutForm(driver)
     handleRedirect(driver)
     fillOutForm(driver)
-    driver.switch_to.parent_frame()
     if driver.title[-16:] != "Blackboard Learn":
         driver.close()
         root.quit()
+    clickMyGrades(driver)
 
 
 
