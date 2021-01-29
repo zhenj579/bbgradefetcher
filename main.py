@@ -70,8 +70,10 @@ def go():
         root.quit()
     clickMyGrades(driver)
 
-
+def onEnterButtonPressed(event):
+    go()
 
 getButton = tk.Button(root, text="Go", command=go).grid(row=2, column=1)
+root.bind('<Return>', onEnterButtonPressed)
 
 root.mainloop()
